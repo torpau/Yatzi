@@ -3,14 +3,14 @@ package com.company;
 import java.util.Scanner;
 
 public class YatziMain {
-    public static Die[] ds;
+    public static Face[] ds;
     public static boolean bGameIsOn = true;
 
     public static void main(String[] args) {
         int iturn = 0;
-        ds = new Die[5];
+        ds = new Face[5];
         for(int d=0;d<5;d++) {
-            ds[d] = new Die();
+            ds[d] = new Face();
         }
         //We will continue until the game is over
         while(bGameIsOn == true) {

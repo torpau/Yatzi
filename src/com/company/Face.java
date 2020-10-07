@@ -1,9 +1,9 @@
 package com.company;
 
-public class Die extends BoardGameMaterial {
+public class Face extends BoardGameMaterial {
     public int value = 0;
 
-    public Die() {
+    public Face() {
         value = (int) Math.random();
     }
 
