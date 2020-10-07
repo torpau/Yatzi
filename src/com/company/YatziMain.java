@@ -19,7 +19,7 @@ public class YatziMain {
             while(iturn < 3) {
                 System.out.println("Starting turn " + (iturn+1) + " of 3, rolling dice.");
                 for(int i=0;i<ds.length;i++) {
-                    ds[i].rollDice();
+                    ds[i].DieRoll();
                     System.out.println(i + ": " + ds[i].getString());
                 }
 

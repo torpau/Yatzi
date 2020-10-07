@@ -1,22 +1,20 @@
 package com.company;
 
 public class Face extends BoardGameMaterial {
-    public int value = rollDice();
+    public int value = 0;
 
-    /* används inte
-    public Face() {
-        value = (int) Math.random();
-    }
-     */
 
-    /* ersatt med rollDice
+    public Face() { value = (int) Math.random(); }
+
+
+
     public int DieRoll() {
         value = (int)(Math.random()*6+1);
         return value;
     }
-     */
 
-    public int rollDice(){ return Math.toIntExact(Math.round(Math.random()*6+1)); }
+    // varför fungerar inte denna?
+    public int rollDice(){ return (int)(Math.random()*6+1); }
 
     /*
     public int DieReroll() {
