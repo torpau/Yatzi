@@ -14,16 +14,17 @@ public class YatziMain {
         }
         //We will continue until the game is over
         while(bGameIsOn == true) {
-            iturn = 0;
+            iturn = 0;              // ett istället (int round)
             System.out.println("Welcome to Yatzi!");
             while(iturn < 3) {
                 System.out.println("Starting turn " + (iturn+1) + " of 3, rolling dice.");
                 for(int i=0;i<ds.length;i++) {
-                    ds[i].DieRoll();
-                    //ds[i].value = 5; //Test if yatzi work
+                    ds[i].rollDice();
                     System.out.println(i + ": " + ds[i].getString());
                 }
+
                 //YATZI
+                /* ersatt med didYouGotYatzi(Face[] ds)
                 boolean flag = true;
                 for(int j=1;j<5;j++) {
                     if(ds[j].value!=ds[j-1].value) {
@@ -31,8 +32,13 @@ public class YatziMain {
                         flag = false;
                     }
                 }
-                if(flag == true) {
+                 */
+
+                if(didYouGotYatzi(ds)) {
+                    /* ersatt med youGotYatzi(Face[] ds)
                     System.out.println("You got YATZI! in " + ds[0].value + "'s");
+                     */
+                    youGotYatzi(ds);
                     return;
                 } else {
                     //Here we check if there is no Yatzy: then we check what turn we are on and asks the player if we want to continue or not
@@ -58,5 +64,16 @@ public class YatziMain {
                 }
             }
         }
+    }
+    public static boolean didYouGotYatzi(Face[] ds) {
+        boolean isYatzi = true;
+        for (int j = 1; j < 5; j++) {
+            if(ds[j].value != ds[j - 1].value){ return false; }
+        }
+        return isYatzi;
+    }
+
+    public static void youGotYatzi(Face[] ds){
+        System.out.println("You got YATZI! in " + ds[0].value + "'s");
     }
 }
