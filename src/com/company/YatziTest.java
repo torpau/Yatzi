@@ -9,26 +9,25 @@ public class YatziTest {
     @Test
     @DisplayName("testing when all dices are the same")
     void isYatziWhenAllFacesMatches() {
-        Face[] dices = new Face[5];
-
+        Dice[] dices = new Dice[5];
         for(int i = 0; i < dices.length; i++ ) {
-            dices[i] = new Face();
+            dices[i] = new Dice();
             dices[i].setDiceValue(6);
-        }        for(Face face : dices) { assertEquals(6, face.getDiceValue(), "Not six"); }
+        }
+        for(Dice dice : dices) { assertEquals(6, dice.getDiceValue(), "No Yatzi"); }
 
         if(YatziMain.didYouGetYatzi(dices)) { YatziMain.youGotYatzi(dices); }
-
     }
 
     @Test
-    @DisplayName("testing when dice are not all equal")
+    @DisplayName("testing when dices are not all equal")
     void isNotYatziWhenOneFaceIsNotMatchingTheOther() {
-        Face[] dices = new Face[5];
+        Dice[] dices = new Dice[5];
         for(int i = 0; i < dices.length; i++) {
-            dices[i] = new Face();
+            dices[i] = new Dice();
             dices[i].setDiceValue(6);
         }
         dices[4].setDiceValue(1);
-        for(Face face : dices) { assertEquals(6, face.getDiceValue(), "Not six"); }
+        for(Dice dice : dices) { assertEquals(6, dice.getDiceValue(), "No Yatsi"); }
     }
 }
