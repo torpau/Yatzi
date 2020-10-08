@@ -3,61 +3,38 @@ package com.company;
 import java.util.Scanner;
 
 public class YatziMain {
-    public static Face[] ds;
-    public static boolean bGameIsOn = true;
+    public static Face[] dice;
+    public static boolean GameIsOn = true;
 
     public static void main(String[] args) {
-        int iturn = 0;
-        ds = new Face[5];
-        for(int d=0;d<5;d++) {
-            ds[d] = new Face();
-        }
-        //We will continue until the game is over
-        while(bGameIsOn == true) {
-            iturn = 0;              // ett istället (int round)
+        int turn = 1;
+        initDices();
+        while (GameIsOn) {
             System.out.println("Welcome to Yatzi!");
-            while(iturn < 3) {
-                System.out.println("Starting turn " + (iturn+1) + " of 3, rolling dice.");
-                for(int i=0;i<ds.length;i++) {
-                    ds[i].DieRoll();
-                    System.out.println(i + ": " + ds[i].getString());
+            while (turn < 4) {
+                startingTurn(turn);
+                for (int i = 0; i < dice.length; i++) {
+                    dice[i].rollDice();
+                }
+                for (int i = 0; i < dice.length; i++) {
+                    System.out.println(i+1 + ": " + dice[i].getString());
                 }
 
-                //YATZI
-                /* ersatt med didYouGotYatzi(Face[] ds)
-                boolean flag = true;
-                for(int j=1;j<5;j++) {
-                    if(ds[j].value!=ds[j-1].value) {
-                        //Set flag to false
-                        flag = false;
-                    }
-                }
-                 */
-
-                if(didYouGotYatzi(ds)) {
-                    /* ersatt med youGotYatzi(Face[] ds)
-                    System.out.println("You got YATZI! in " + ds[0].value + "'s");
-                     */
-                    youGotYatzi(ds);
-                    return;
+                if (didYouGetYatzi(dice)) {
+                    youGotYatzi(dice);
                 } else {
-                    //Here we check if there is no Yatzy: then we check what turn we are on and asks the player if we want to continue or not
-                    if(iturn != 2) {
-                        System.out.println("Want to throw again? (y for yes, anything else for no)");
-                        Scanner sc = new Scanner(System.in);
-                        if(sc.next().equals("y")) {
-                            ++iturn;
+                    if (turn < 3) {
+                        if (wannaPlay("Want to throw again? (y for yes, anything else for no)")){
+                            turn++;
                         } else {
-                            bGameIsOn = !bGameIsOn;
+                            GameIsOn = false;
                             break;
                         }
                     } else {
-                        System.out.println("Game over! Want to play again?");
-                        Scanner sc = new Scanner(System.in);
-                        if(sc.next().equals("y")) {
-                            iturn = 0;
+                        if (wannaPlay("Game over! Want to play again?")) {
+                            turn = 1;
                         } else {
-                            bGameIsOn = !bGameIsOn;
+                            GameIsOn = false;
                             break;
                         }
                     }
@@ -65,15 +42,42 @@ public class YatziMain {
             }
         }
     }
-    public static boolean didYouGotYatzi(Face[] ds) {
+
+    public static boolean didYouGetYatzi(Face[] ds) {
         boolean isYatzi = true;
         for (int j = 1; j < 5; j++) {
-            if(ds[j].value != ds[j - 1].value){ return false; }
+            if (ds[j].getDiceValue() != ds[j - 1].getDiceValue()) {
+                return false;
+            }
         }
         return isYatzi;
     }
 
-    public static void youGotYatzi(Face[] ds){
-        System.out.println("You got YATZI! in " + ds[0].value + "'s");
+    public static void youGotYatzi(Face[] ds) {
+        System.out.println("You got YATZI! in " + ds[0].getDiceValue() + "'s");
     }
+
+    public static boolean wannaPlay(String text){
+        System.out.println(text);
+        Scanner sc = new Scanner(System.in);
+        return sc.next().toLowerCase().equals("y");
+    }
+
+    public static void startingTurn(int turn){
+        System.out.println("Starting turn " + turn + " of 3, rolling dice.");
+    }
+
+    public static void initDices(){
+        dice = new Face[5];
+        for (int i = 0; i < 5; i++) {
+            dice[i] = new Face();
+        }
+    }
+
+    public static void rollYourDices(){
+        for(int i = 0; i < dice.length; i++){
+            dice[i].rollDice();
+        }
+    }
+
 }
