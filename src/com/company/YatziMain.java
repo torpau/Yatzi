@@ -4,27 +4,26 @@ import java.util.Scanner;
 
 public class YatziMain {
     public static int turn = 1;
-    public static Dice[] dice;
     public static boolean GameIsOn = true;
 
     public static void main(String[] args) {
         Dice.initDices();
-        while(GameIsOn) {
-            System.out.println("Welcome to Yatzi!");
-            while(turn < 4) {
-                startingTurn(turn);
-                Dice.rollYourDices();
-                Dice.printYourDices();
-                if(didYouGetYatzi(dice)) {
-                    youGotYatzi(dice);
-                } else if(turn < 3) {
-                    howToContinue("message1");
-                } else {
-                    howToContinue("message2");
-                }
-                if(!GameIsOn) {
-                    break;
-                }
+        while(GameIsOn && turn < 4) {
+           if(turn == 1) {
+               System.out.println("Welcome to Yatzi!");
+           }
+               startingTurn(turn);
+               Dice.rollYourDices();
+               Dice.printYourDices();
+           if(didYouGetYatzi(Dice.dice)) {
+                youGotYatzi(Dice.dice);
+            } else if(turn < 3) {
+                howToContinue("Want to throw again? (y for yes, anything else for no)");
+            } else {
+                howToContinue("Game over! Want to play again?");
+            }
+            if(!GameIsOn) {
+                break;
             }
         }
     }
@@ -42,13 +41,7 @@ public class YatziMain {
         System.out.println("You got YATZI! in " + dice[0].getDiceValue() + "'s");
     }
 
-    public static boolean wannaPlay(String text) {
-        if(text.equals("message1")) {
-            System.out.println("Want to throw again? (y for yes, anything else for no)");
-        } else {
-            System.out.println("Game over! Want to play again?");
-        }
-
+    public static boolean wannaPlay() {
         Scanner sc = new Scanner(System.in);
         return sc.next().toLowerCase().equals("y");
     }
@@ -58,13 +51,14 @@ public class YatziMain {
     }
 
     public static void howToContinue(String msg) {
-        if(msg.equals("message1") && wannaPlay("message1")) {
-            turn++;
-        } else if(msg.equals("message2") && wannaPlay("message2")) {
-            turn = 1;
-        } else {
-            GameIsOn = false;
-        }
+        System.out.println(msg);
+        if(wannaPlay()) {
+            if (msg.equals("Want to throw again? (y for yes, anything else for no)")) {
+                turn++;
+            } else {
+                turn = 1;
+            }
+        } else { GameIsOn = false; }
     }
 
 }

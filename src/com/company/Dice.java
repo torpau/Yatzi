@@ -2,6 +2,7 @@ package com.company;
 
 public class Dice {
     private int value;
+    public static Dice[] dice;
 
     public Dice() { value = 0; }
 
@@ -15,21 +16,21 @@ public class Dice {
 
 
     public static void initDices() {
-        YatziMain.dice = new Dice[5];
+        dice = new Dice[5];
         for(int i = 0; i < 5; i++) {
-            YatziMain.dice[i] = new Dice();
+            dice[i] = new Dice();
         }
     }
 
     public static void rollYourDices() {
-        for(int i = 0; i < YatziMain.dice.length; i++) {
-            YatziMain.dice[i].rollDice();
+        for(int i = 0; i < dice.length; i++) {
+            dice[i].rollDice();
         }
     }
 
     public static void printYourDices() {
-        for(int i = 0; i < YatziMain.dice.length; i++) {
-            System.out.println(i + 1 + ": " + YatziMain.dice[i].getString());
+        for(int i = 0; i < dice.length; i++) {
+            System.out.println(i + 1 + ": " + dice[i].getString());
         }
     }
 }

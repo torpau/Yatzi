@@ -23,11 +23,12 @@ public class YatziTest {
     @DisplayName("testing when dices are not all equal")
     void isNotYatziWhenOneFaceIsNotMatchingTheOther() {
         Dice[] dices = new Dice[5];
-        for(int i = 0; i < dices.length; i++) {
+        for (int i = 0; i < dices.length; i++) {
             dices[i] = new Dice();
             dices[i].setDiceValue(6);
         }
         dices[4].setDiceValue(1);
-        for(Dice dice : dices) { assertEquals(6, dice.getDiceValue(), "No Yatsi"); }
+
+        assertFalse(YatziMain.didYouGetYatzi(dices), "Wrong, all the dices are equal");
     }
 }
