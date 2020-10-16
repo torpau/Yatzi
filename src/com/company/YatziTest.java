@@ -1,18 +1,16 @@
 package com.company;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class YatziTest {
+    public final DiceRoll[] dices = new DiceRoll[5];
 
     @Test
     @DisplayName("testing when all dices are the same")
     void isYatziWhenAllFacesMatches() {
-        DiceRoll[] dices = new DiceRoll[5];
-        for(int i = 0; i < dices.length; i++ ) {
+        for(int i = 0; i < 5; i++ ) {
             dices[i] = new DiceRoll();
             dices[i].setDiceValue(6);
         }
@@ -24,7 +22,7 @@ public class YatziTest {
     @Test
     @DisplayName("testing when dices are not all equal")
     void isNotYatziWhenOneFaceIsNotMatchingTheOther() {
-        DiceRoll[] dices = new DiceRoll[5];
+        //DiceRoll[] dices = new DiceRoll[5];
         for (int i = 0; i < dices.length; i++) {
             dices[i] = new DiceRoll();
             dices[i].setDiceValue(6);

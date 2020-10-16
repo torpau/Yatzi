@@ -6,10 +6,8 @@ public class YatziMain {
     private int turn = 1;
     private boolean gameIsOn = true;
 
-
     public YatziMain() {
         mainGame();
-
     }
 
     public static void main(String[] args) {
@@ -39,7 +37,7 @@ public class YatziMain {
         }
     }
 
-    public boolean didYouGetYatzi(DiceRoll[] dices) {
+    public static boolean didYouGetYatzi(DiceRoll[] dices) {
         for(int i = 1; i < 5; i++) {
             if(dices[i].getDiceValue() != dices[i - 1].getDiceValue()) {
                 return false;
@@ -48,7 +46,7 @@ public class YatziMain {
         return true;
     }
 
-    public void youGotYatzi(DiceRoll[] dices) {
+    public static void youGotYatzi(DiceRoll[] dices) {
         System.out.println("You got YATZI! in " + dices[0].getDiceValue() + "'s");
     }
 
